@@ -28,11 +28,15 @@ class ConfigServiceProvider extends ServiceProvider
     public function boot()
     {
         if ($this->app->configurationIsCached()) {
-            $this->app->terminating(function () {
-                if ($this->app->setting->stale()) {
-                    $this->app->make(Kernel::class)->call('config:cache');
-                }
-            });
+            if ($this->app->environment() === 'production') {
+                $this->app->terminating(function () {
+                    if ($this->app->setting->stale()) {
+                        $this->app->make(Kernel::class)->call('config:cache');
+                    }
+                });
+            } else {
+                $this->app->make(Kernel::class)->call('config:clear');
+            }
 
             return;
         }
@@ -69,9 +73,11 @@ class ConfigServiceProvider extends ServiceProvider
 
         $this->app->config->set('cors.paths.api/v1/*.allowedOrigins', $allowedOrigins);
 
-        $this->app->terminating(function () {
-            $this->app->make(Kernel::class)->call('config:cache');
-        });
+        if ($this->app->environment() === 'production') {
+            $this->app->terminating(function () {
+                $this->app->make(Kernel::class)->call('config:cache');
+            });
+        }
     }
 
     /**
