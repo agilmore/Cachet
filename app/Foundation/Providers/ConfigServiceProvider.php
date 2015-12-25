@@ -42,7 +42,7 @@ class ConfigServiceProvider extends ServiceProvider
         }
 
         try {
-            $this->app->config->set('settings', $this->app->settings->all());
+            $this->app->config->set('setting', $this->app->settings->all());
         } catch (Exception $e) {
             //
         }
