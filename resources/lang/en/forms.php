@@ -31,7 +31,7 @@ return [
         'email'         => 'Email',
         'password'      => 'Password',
         '2fauth'        => 'Authentication Code',
-        'invalid'       => 'Invalid email or password',
+        'invalid'       => 'Invalid username or password',
         'invalid-token' => 'Invalid token',
         'cookies'       => 'You must enable cookies to login.',
     ],
@@ -84,6 +84,7 @@ return [
         'type_sum'         => 'Sum',
         'type_avg'         => 'Average',
         'places'           => 'Decimal Places',
+        'default_view'     => 'Default View',
 
         'points' => [
             'value' => 'Value',

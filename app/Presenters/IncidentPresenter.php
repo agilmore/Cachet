@@ -189,9 +189,7 @@ class IncidentPresenter extends BasePresenter implements Arrayable
      */
     public function human_status()
     {
-        $statuses = trans('cachet.incidents.status');
-
-        return $statuses[$this->wrappedObject->status];
+        return trans('cachet.incidents.status.'.$this->wrappedObject->status);
     }
 
     /**
